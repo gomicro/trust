@@ -28,6 +28,13 @@ linters: ## Run all the linters
 .PHONY: test
 test: unit_test ## Run all available tests
 
+.PHONY: update_rootca
+update_rootca: ## Update the root CA from the latest copy of centos
+	@echo -en "package trust\n\n" > globalchain.go
+	@echo -en "const globalPemCerts string = \`\n\n" >> globalchain.go
+	@docker run centos /bin/bash -c 'cat /etc/ssl/certs/ca-bundle.crt' >> globalchain.go
+	@echo "\`" >> globalchain.go
+
 .PHONY: unit_test
 unit_test: ## Run unit tests
 	go test ./...
