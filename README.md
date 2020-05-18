@@ -1,4 +1,9 @@
 # Trust
+[![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/gomicro/trust/Build/master)](https://github.com/gomicro/trust/actions?query=workflow%3ABuild)
+[![Go Reportcard](https://goreportcard.com/badge/github.com/gomicro/trust)](https://goreportcard.com/report/github.com/gomicro/trust)
+[![go.dev reference](https://img.shields.io/badge/go.dev-reference-007d9c?logo=go&logoColor=white)](https://pkg.go.dev/github.com/gomicro/trust)
+[![License](https://img.shields.io/github/license/gomicro/trust.svg)](https://github.com/gomicro/trust/blob/master/LICENSE.md)
+[![Release](https://img.shields.io/github/release/gomicro/trust.svg)](https://github.com/gomicro/trust/releases/latest)
 
 Trust is an in memory CA Pool for use in scratch containers.
 
