@@ -1,0 +1,38 @@
+project:
+  name: trust
+
+steps:
+  build:
+    help: build the project
+    cmd: echo "run the build"
+
+  clean:
+    help: cleans out all generated items
+    cmds:
+      - go clean
+
+  generate_key:
+    help: generate a new key
+    cmd: openssl genrsa -des3 -out testCA.key 2048
+
+  generate_pem:
+    help: generate the pem from a key
+    pre:
+      - generate_key
+    cmd: openssl req -x509 -new -nodes -key testCA.key -sha256 -days 3650 -out testCA.pem
+
+  linters:
+    help: run all the linters
+    cmd: docker run -v $$PWD:/go$${PWD/$$GOPATH} --workdir /go$${PWD/$$GOPATH} gomicro/golinters
+
+  update_rootca:
+    help: update the root CA from the latest copy of centos
+    cmds:
+      - echo -en "package trust\n\n" > globalchain.go
+      - echo -en "const globalPemCerts string = \`\n\n" >> globalchain.go
+      - docker run centos /bin/bash -c 'cat /etc/ssl/certs/ca-bundle.crt' >> globalchain.go
+      - echo "\`" >> globalchain.go
+
+  unit_test:
+    help: run unit tests
+    cmd: go test ./...
