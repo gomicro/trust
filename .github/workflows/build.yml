@@ -18,8 +18,8 @@ jobs:
         with:
           version: v1.29
 
-  test:
-    name: Test
+  unit_test:
+    name: Unit Test
     runs-on: ubuntu-latest
 
     env:
